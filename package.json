@@ -1,0 +1,32 @@
+{
+  "name": "youtube-video-uploader",
+  "description": "",
+  "homepage": "https://github.com/samradical/youtube-video-uploader",
+  "author": "Sam Elie <sam@add.dog>",
+  "version": "0.0.4",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/samradical/youtube-video-uploader.git",
+    "web": "https://github.com/samradical/youtube-video-uploader/"
+  },
+  "main": "index.js",
+  "scripts": {},
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "colors": "^1.1.2",
+    "google-cloudstorage-commands": "*"
+  },
+  "engines": {
+    "node": ">=6.7.0"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/samradical/youtube-video-uploader/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  ]
+}
