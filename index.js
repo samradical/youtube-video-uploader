@@ -33,8 +33,8 @@ module.exports = (IDS, BUCKET, options = {}) => {
         const sidx = itagGroup[1]
         fs.writeFileSync(jsonPath, JSON.stringify(sidx))
         return uploadFile(videoPath, BUCKET, true).then(() => {
-          //fs.unlinkSync(videoPath)
-          return uploadFile(jsonPath, BUCKET, true)
+          fs.unlinkSync(videoPath)
+          return uploadFile(jsonPath, BUCKET, true).then(r=>itagGroup)
         })
       },
       { concurrency: 1 }
