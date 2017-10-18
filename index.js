@@ -20,7 +20,7 @@ module.exports = (IDS, BUCKET, options = {}) => {
   } catch (e) {}
   return Downloader(IDS, {
     save: save,
-    wgetDownload:true,
+    wgetDownload: true,
     itags: options.itags || [],
   }).then(r => {
     return Q.map(
@@ -28,13 +28,21 @@ module.exports = (IDS, BUCKET, options = {}) => {
       itagGroup => {
         const videoPath = itagGroup[0]
         const { name } = path.parse(videoPath)
-        const jsonPath = `${name}.json`
+        const jsonPath = path.join(save,`${name}.json`)
         console.log(colors.green(`videoPath: ${videoPath}`))
+        const realItag = videoPath.substring(
+          videoPath.length - 3,
+          videoPath.length
+        )
+        console.log(colors.green(`ITAG: ${realItag}`))
         const sidx = itagGroup[1]
+        sidx.itag = realItag
         fs.writeFileSync(jsonPath, JSON.stringify(sidx))
         return uploadFile(videoPath, BUCKET, true).then(() => {
           fs.unlinkSync(videoPath)
-          return uploadFile(jsonPath, BUCKET, true).then(r=>itagGroup)
+          return uploadFile(jsonPath, BUCKET, true).then(
+            r => itagGroup
+          )
         })
       },
       { concurrency: 1 }
